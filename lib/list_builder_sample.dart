@@ -7,7 +7,7 @@ class ListBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Datas datas=Datas();
+    Datas datas = Datas();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -37,29 +37,41 @@ class ListBuilder extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 10,
           vertical: 10,
         ),
-        child: ListView.builder(
+        child: ListView.separated(
+          separatorBuilder: (context, index) => const Divider(
+            endIndent: 10,
+            indent: 10,
+          ),
           itemCount: datas.items.length,
           itemBuilder: (context, index) {
-            return  ListTile(
-              leading: CircleAvatar(),
+            return ListTile(
+              leading:  CircleAvatar(backgroundImage: AssetImage(datas.items[index]["image"]),),
               title: Text(datas.items[index]["name"]),
               subtitle: Row(
                 children: [
-                  Icon(Icons.done_all),
-                  SizedBox(
+                  const Icon(Icons.done_all),
+                  const SizedBox(
                     width: 5,
                   ),
                   Text(datas.items[index]["message"]),
                 ],
               ),
               trailing: Text(datas.items[index]["time"].toString()),
-           onTap: () {
-             Navigator.of(context).push(MaterialPageRoute(builder: (context) => Details(name:datas.items[index]["name"]),));
-           }, );
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Details(
+                    name: datas.items[index]["name"],
+                    message: datas.items[index]["message"],
+                    time: datas.items[index]["time"],
+                    image:datas.items[index]["image"],
+                  ),
+                ));
+              },
+            );
           },
         ),
       ),
