@@ -49,7 +49,9 @@ class ListBuilder extends StatelessWidget {
           itemCount: datas.items.length,
           itemBuilder: (context, index) {
             return ListTile(
-              leading:  CircleAvatar(backgroundImage: AssetImage(datas.items[index]["image"]),),
+              leading: CircleAvatar(
+                backgroundImage: AssetImage(datas.items[index]["image"]),
+              ),
               title: Text(datas.items[index]["name"]),
               subtitle: Row(
                 children: [
@@ -67,7 +69,7 @@ class ListBuilder extends StatelessWidget {
                     name: datas.items[index]["name"],
                     message: datas.items[index]["message"],
                     time: datas.items[index]["time"],
-                    image:datas.items[index]["image"],
+                    image: datas.items[index]["image"],
                   ),
                 ));
               },
